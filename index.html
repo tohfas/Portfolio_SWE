@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Dark Mode Theme */
+        :root {
+            /* Dark mode colors */
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --accent-color: #64ffda;
+            --card-bg: #112240;
+            --hover-bg: #1d3557;
+            
+            /* Gradients */
+            --primary-gradient: linear-gradient(135deg, #64ffda, #48bf9c);
+            --secondary-gradient: linear-gradient(135deg, #64ffda20, #48bf9c20);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-card i {
+            color: #3498db;
+            font-size: 1.2em;
+        }
+
+        .project-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .achievements-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(145deg,rgba(3, 82, 80, 0.1),rgba(7, 96, 95, 0.1));
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .achievements-section h2 {
+            color:rgb(255, 255, 255);
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            color: #3498db;
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            padding: 8px;
+        }
+
+        .achievement-content h3 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        /* Updated education section styles */
+        .education-section {
+            background: var(--card-background);
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .education-section h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .education-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .education-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            background: var(--card-background);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .education-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .institution {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .ranking {
+            font-size: 0.7em;
+            color: var(--accent-color);
+            background: rgba(0,206,201,0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            white-space: nowrap;
+        }
+
+        .degree {
+            font-size: 1.1em;
+            color: var(--primary-color);
+            line-height: 1.4;
+        }
+
+        .achievements {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .achievement-tag {
+            color: #666;
+            font-size: 0.9em;
+            background: rgba(0,0,0,0.05);
+            padding: 4px 12px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .achievement-tag i {
+            color: var(--secondary-color);
+            font-size: 0.9em;
+        }
+
+        .location-date {
+            text-align: right;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .location-date div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .location-date i {
+            color: var(--accent-color);
+            font-size: 0.9em;
+        }
+
+        /* Enhanced experience section styles */
+        .experience-section {
+            background: var(--card-background);
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .experience-section h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .experience-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 25px;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            background: var(--card-background);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .experience-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .experience-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .company-name {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .role-title {
+            font-size: 1.1em;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding-left: 2px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .tech-tag {
+            background: rgba(9, 132, 227, 0.08);
+            color: var(--secondary-color);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(9, 132, 227, 0.1);
+        }
+
+        .tech-tag:hover {
+            background: rgba(9, 132, 227, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .exp-location-date {
+            text-align: right;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .exp-location-date div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .exp-location-date i {
+            color: var(--accent-color);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .experience-item {
+                grid-template-columns: 1fr;
+            }
+
+            .exp-location-date {
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            .exp-location-date div {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Updated Skills Section with consistent styling */
+        .skills-section {
+            padding: 40px;
+            margin: 40px 0;
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .skills-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .skills-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #00c6fb, #005bea);
+            border-radius: 2px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category {
+            padding: 30px;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skill-category h3 i {
+            font-size: 1.4em;
+        }
+
+        .skill-item {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            color: var(--primary-color);
+            background: rgba(9, 132, 227, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(9, 132, 227, 0.1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            background: rgba(9, 132, 227, 0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .skill-item i {
+            color: var(--accent-color);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-category:nth-child(1) .skill-item { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+        .skill-category:nth-child(2) .skill-item { background: linear-gradient(135deg, #4ECDC4, #45B7D1); }
+        .skill-category:nth-child(3) .skill-item { background: linear-gradient(135deg, #45B7D1, #2E94B9); }
+        .skill-category:nth-child(4) .skill-item { background: linear-gradient(135deg, #96CEB4, #6BAF92); }
+        .skill-category:nth-child(5) .skill-item { background: linear-gradient(135deg, #9B59B6, #8E44AD); }
+
+        .skill-category:nth-child(6) {
+            background: linear-gradient(135deg, #764BA240, #667EEA10);
+            border-left: 4px solid #764BA2;
+        }
+        
+        .skill-category:nth-child(6) h3 i {
+            color: #764BA2;
+            background: -webkit-linear-gradient(45deg, #764BA2, #667EEA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .skill-category:nth-child(6) .skill-item {
+            background: rgba(118, 75, 162, 0.05);
+            border: 1px solid rgba(118, 75, 162, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:nth-child(6) .skill-item:hover {
+            background: rgba(118, 75, 162, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.15);
+        }
+        
+        .skill-category:nth-child(6) .skill-item i {
+            color: #764BA2;
+            background: -webkit-linear-gradient(45deg, #764BA2, #667EEA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Update technology section title styling */
+        .technology-section h2 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .technology-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .technology-section {
+            padding: 40px;
+            margin: 40px 0;
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .tech-scroll {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        .tech-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .tech-name {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - 40px));
+            }
+        }
+
+        /* Add styles for the new sections */
+        .certifications-section,
+        .cocurricular-section,
+        .soft-skills-section {
+            background: var(--card-background);
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .certifications-section h2,
+        .cocurricular-section h2,
+        .soft-skills-section h2 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .certifications-section h2::after,
+        .cocurricular-section h2::after,
+        .soft-skills-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .cert-list,
+        .activity-list,
+        .soft-skills-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cert-item,
+        .activity-item,
+        .soft-skill-item {
+            background: #ffffff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover,
+        .activity-item:hover,
+        .soft-skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Updated styles for consistency */
+        .soft-skills-section .soft-skill-item,
+        .certifications-section .cert-item,
+        .cocurricular-section .activity-item {
+            background: var(--bg-secondary);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .soft-skills-section .soft-skill-item:hover,
+        .certifications-section .cert-item:hover,
+        .cocurricular-section .activity-item:hover {
+            transform: translateX(10px);
+            background: var(--hover-bg);
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* Standardize text colors to match ANU+ Award */
+        .soft-skills-section .soft-skill-item strong,
+        .certifications-section .cert-item,
+        .cocurricular-section .activity-item {
+            color: var(--accent-color);
+        }
+
+        .soft-skills-section .soft-skill-item p,
+        .certifications-section .cert-item span,
+        .cocurricular-section .activity-item span {
+            color: var(--text-secondary);
+        }
+
+        /* Icons color */
+        .soft-skills-section i,
+        .certifications-section i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        /* Enhanced section styling */
+        section {
+            background: var(--bg-secondary);
+            margin: 60px auto;
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        section:hover {
+            border-color: rgba(100, 255, 218, 0.2);
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* Section titles */
+        section h2 {
+            color: var(--accent-color);
+            font-size: 2.8em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* Card styling */
+        .achievement-item,
+        .tech-item,
+        .skill-category,
+        .project-card,
+        .experience-item,
+        .education-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+        }
+
+        /* Hover effects */
+        .achievement-item:hover,
+        .tech-item:hover,
+        .skill-category:hover,
+        .project-card:hover,
+        .experience-item:hover,
+        .education-item:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* Technology section */
+        .tech-scroll {
+            background: linear-gradient(to right, 
+                rgba(17, 34, 64, 0), 
+                rgba(17, 34, 64, 0.9), 
+                rgba(17, 34, 64, 0)
+            );
+        }
+
+        .tech-item {
+            background: var(--card-bg);
+            padding: 25px;
+        }
+
+        .tech-icon i {
+            color: var(--accent-color);
+        }
+
+        .tech-name {
+            color: var(--text-secondary);
+        }
+
+        /* Skills section */
+        .skill-item {
+            background: rgba(100, 255, 218, 0.05);
+            padding: 12px 20px;
+            border-radius: 25px;
+            color: var(--text-primary);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .skill-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .skill-item i {
+            color: var(--accent-color);
+        }
+
+        /* Projects section */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Links and buttons */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        /* Text highlights */
+        ::selection {
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(100, 255, 218, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.2); }
+        }
+
+        .glow-effect {
+            animation: glow 3s infinite;
+        }
+
+        /* Enhanced Project Section Styling */
+        .projects-section .project-card {
+            background: var(--bg-secondary);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .projects-section .project-card:hover {
+            transform: translateX(10px);
+            background: var(--hover-bg);
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* Project Title */
+        .project-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Project Description */
+        .project-card p {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Project Technologies */
+        .project-tech {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .project-links a:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary);
+        }
+
+        /* Project Tags/Skills */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .project-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            transition: var(--transition);
+        }
+
+        .project-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+        }
+
+        /* Update experience items with industry icons */
+        .experience-item {
+            position: relative;
+            padding-left: 60px;  /* Make space for icon */
+        }
+
+        .industry-icon {
+            position: absolute;
+            left: 15px;
+            top: 35px;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Tohfa Siddika Barbhuiya</h1>
+        <h2>AI Software Engineer | Data Scientist - Business Intelligence and Data Analytics</h2>
+        <h4> Email ID: tohfasiddika22@gmail.com</h4>
+    </header>
+
+    <main>
+        <p>I am a passionate AI Software Engineer with a strong foundation in building innovative, scalable, and impactful web applications. I have expertise in Artificial Intelligence, Generative AI, building Chatbots, RAG pipelines, LLMs, Machine Learning, and Data Science. With hands-on experience at Amazon, EXL, and Research Graph Foundation, I have worked on scalable AI-driven solutions, data analytics, and business intelligence to drive impactful decision-making. My skill set spans Web and Android Application Development, UX Design, and Product Management, allowing me to design and develop user-centric, intelligent systems. Passionate about innovation and problem-solving, I strive to create technology that enhances both business efficiency and user experience.</p>
+
+        <!-- 1. Achievements Section -->
+        <section class="achievements-section">
+            <h2>Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>ANU+ Award</h3>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>ACS Google Scholarship, Australia</h3>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>5-Star Gold Badge</h3>
+                        <p>SQL and Python on HackerRank</p>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>Vice Chancellor Scholarship</h3>
+                        <p>Australian National University</p>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>University Merit Scholarship Holder</h3>
+                        <p>Bachelor's of Technology</p>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="achievemenxt-content">
+                        <h3>National Level Achievements</h3>
+                        <p>Debater and Chess Player</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Technologies Section -->
+        <section class="technology-section">
+            <h2>Technologies</h2>
+            <div class="tech-scroll">
+                <!-- Programming Languages -->
+                <div class="tech-item">
+                    <i class="fab fa-java tech-icon"></i>
+                    <span class="tech-name">Java</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-python tech-icon"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database tech-icon"></i>
+                    <span class="tech-name">SQL</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-html5 tech-icon"></i>
+                    <span class="tech-name">HTML</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt tech-icon"></i>
+                    <span class="tech-name">CSS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js tech-icon"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js tech-icon"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-android tech-icon"></i>
+                    <span class="tech-name">Android Studio</span>
+                </div>
+
+                <!-- Cloud Platforms -->
+                <div class="tech-item">
+                    <i class="fab fa-aws tech-icon"></i>
+                    <span class="tech-name">AWS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-chart-bar tech-icon"></i>
+                    <span class="tech-name">Redshift</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-chart-line tech-icon"></i>
+                    <span class="tech-name">QuickSight</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-fire tech-icon"></i>
+                    <span class="tech-name">Firebase</span>
+                </div>
+
+                <!-- Development Tools -->
+                <div class="tech-item">
+                    <i class="fas fa-vial tech-icon"></i>
+                    <span class="tech-name">JUnit</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-stream tech-icon"></i>
+                    <span class="tech-name">Streamlit</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-git-alt tech-icon"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-github tech-icon"></i>
+                    <span class="tech-name">GitHub</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-gitlab tech-icon"></i>
+                    <span class="tech-name">GitLab</span>
+                </div>
+
+                <!-- Databases -->
+                <div class="tech-item">
+                    <i class="fas fa-server tech-icon"></i>
+                    <span class="tech-name">RDBMS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-leaf tech-icon"></i>
+                    <span class="tech-name">MongoDB</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-paper-plane tech-icon"></i>
+                    <span class="tech-name">Postman</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section class="skills-section">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <!-- Card 1: Languages -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i>Languages</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fab fa-java"></i>Java</span>
+                        <span class="skill-item"><i class="fab fa-python"></i>Python</span>
+                        <span class="skill-item"><i class="fas fa-database"></i>SQL</span>
+                        <span class="skill-item"><i class="fab fa-html5"></i>HTML</span>
+                        <span class="skill-item"><i class="fab fa-css3-alt"></i>CSS</span>
+                        <span class="skill-item"><i class="fab fa-js"></i>JavaScript</span>
+                        <span class="skill-item"><i class="fab fa-node-js"></i>Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Cloud -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i>Cloud Services</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fab fa-aws"></i>AWS</span>
+                        <span class="skill-item"><i class="fas fa-chart-bar"></i>Redshift</span>
+                        <span class="skill-item"><i class="fas fa-chart-line"></i>QuickSight</span>
+                        <span class="skill-item"><i class="fas fa-fire"></i>Firebase</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Development -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i>Development</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fas fa-vial"></i>JUnit</span>
+                        <span class="skill-item"><i class="fas fa-stream"></i>Streamlit</span>
+                        <span class="skill-item"><i class="fab fa-git-alt"></i>Git</span>
+                        <span class="skill-item"><i class="fab fa-github"></i>GitHub</span>
+                        <span class="skill-item"><i class="fab fa-gitlab"></i>GitLab</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Databases -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i>Databases</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fas fa-server"></i>RDBMS</span>
+                        <span class="skill-item"><i class="fas fa-leaf"></i>MongoDB</span>
+                        <span class="skill-item"><i class="fas fa-paper-plane"></i>Postman</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Development Practices -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i>Development Practices</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fas fa-code-branch"></i>SDLC</span>
+                        <span class="skill-item"><i class="fas fa-bug"></i>Debugging</span>
+                        <span class="skill-item"><i class="fas fa-vial"></i>Testing</span>
+                        <span class="skill-item"><i class="fas fa-tasks"></i>Project Management</span>
+                        <span class="skill-item"><i class="fas fa-users"></i>Leadership</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: Expertise -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-star"></i>Expertise</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fas fa-robot"></i>Artificial Intelligence</span>
+                        <span class="skill-item"><i class="fas fa-brain"></i>Machine Learning</span>
+                        <span class="skill-item"><i class="fas fa-layer-group"></i>Full Stack Web Development</span>
+                        <span class="skill-item"><i class="fab fa-android"></i>Android Application Development</span>
+                        <span class="skill-item"><i class="fas fa-chart-line"></i>Data Analytics</span>
+                        <span class="skill-item"><i class="fas fa-chart-bar"></i>Business Intelligence</span>
+                        <span class="skill-item"><i class="fas fa-analytics"></i>Business Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projects Section -->
+        <section class="projects-section">
+            <h2 style="text-align: center; color:rgb(242, 245, 253); margin-bottom: 30px; font-size: 2em;">Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3><i class="fas fa-robot"></i> AI Projects</h3>
+                    <p>Showcasing projects in Generative AI, LLMs, RAG pipelines, and Chatbots. Features implementations of cutting-edge AI technologies and solutions.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-brain"></i> ML Projects</h3>
+                    <p>Collection of Machine Learning projects including predictive modeling, computer vision, and natural language processing applications.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-code"></i> Web Dev Projects</h3>
+                    <p>Full-stack web development projects demonstrating expertise in modern frameworks, responsive design, and scalable architectures.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Android Projects</h3>
+                    <p>Mobile application development showcasing Android expertise, UI/UX design, and implementation of various mobile features.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fab fa-github"></i> Open Source Projects</h3>
+                    <p>Contributions to open source communities, including personal projects and collaborative developments.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-lightbulb"></i> Tech Exploration Projects</h3>
+                    <p>Experimental projects exploring emerging technologies, innovative solutions, and proof-of-concept implementations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Professional Experience Section -->
+        <section class="experience-section">
+            <h2>Professional Experience</h2>
+
+            <div class="experience-item">
+                <i class="fas fa-microscope industry-icon"></i>
+                <div class="experience-details">
+                    <div class="company-name">University of South Australia</div>
+                    <div class="role-title">Casual Academic</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Data Visualisation for Data Science</span>
+                        <span class="tech-tag">Data Science</span>
+                        
+                    </div>
+                </div>
+                <div class="exp-location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Adelaide SA, Australia (Remote)</div>
+                    <div><i class="fas fa-calendar-alt"></i>03/2025-Present</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <i class="fas fa-laptop-code industry-icon"></i>
+                <div class="experience-details">
+                    <div class="company-name">Research Graph Foundation Ltd.</div>
+                    <div class="role-title">Artificial Intelligence Intern</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">CLIP</span>
+                        <span class="tech-tag">LLaVa</span>
+                        <span class="tech-tag">Mistral</span>
+                        <span class="tech-tag">Stable Diffusion</span>
+                        <span class="tech-tag">AI Photo Classifier</span>
+                    </div>
+                </div>
+                <div class="exp-location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Melbourne, Australia (Remote)</div>
+                    <div><i class="fas fa-calendar-alt"></i>07/2024-10/2024</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <i class="fab fa-aws industry-icon"></i>
+                <div class="experience-details">
+                    <div class="company-name">Amazon India Pvt Ltd</div>
+                    <div class="role-title">Business Analyst</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Redshift</span>
+                        <span class="tech-tag">Quicksight</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+                <div class="exp-location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Bengaluru, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>07/2022-06/2023</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <i class="fas fa-code industry-icon"></i>
+                <div class="experience-details">
+                    <div class="company-name">EXL Service</div>
+                    <div class="role-title">Business Analyst</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">R Shiny</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Financial Modeling</span>
+                    </div>
+                </div>
+                <div class="exp-location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Gurugram, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>11/2020-07/2022</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <i class="fas fa-leaf industry-icon"></i>
+                <div class="experience-details">
+                    <div class="company-name">CSIR National Physical Laboratory</div>
+                    <div class="role-title">Summer Research Scholar</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Research</span>
+                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Scientific Communication</span>
+                    </div>
+                </div>
+                <div class="exp-location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>New Delhi, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>06/2019-07/2020</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Education Section -->
+        <section class="education-section">
+            <h2>Education</h2>
+
+            <div class="education-item">
+                <div class="education-details">
+                    <div class="institution">
+                        Australian National University
+                        <span class="ranking">QS World Ranking: 30</span>
+                    </div>
+                    <div class="degree">Master of Computing, Dual Specialisation: Software Engineering, Artificial Intelligence</div>
+                    <div class="achievements">
+                        <span class="achievement-tag">
+                            <i class="fas fa-award"></i>
+                            Vice Chancellor Scholarship Holder
+                        </span>
+                        <span class="achievement-tag">
+                            <i class="fas fa-star"></i>
+                            GPA: 6/7
+                        </span>
+                    </div>
+                </div>
+                <div class="location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Canberra, Australia</div>
+                    <div><i class="fas fa-calendar-alt"></i>07/2023-06/2025</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-details">
+                    <div class="institution">
+                        Jamia Millia Islamia
+                        <span class="ranking">NIRF Rank: 3</span>
+                    </div>
+                    <div class="degree">Bachelor of Technology, Electronics and Communication Engineering</div>
+                    <div class="achievements">
+                        <span class="achievement-tag">
+                            <i class="fas fa-award"></i>
+                            Merit Scholarship Holder
+                        </span>
+                        <span class="achievement-tag">
+                            <i class="fas fa-star"></i>
+                            CGPA: 9.84/10
+                        </span>
+                    </div>
+
+                </div>
+                <div class="location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>New Delhi, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>2016-2020</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-details">
+                    <div class="institution">Kendriya Vidyalaya Silchar</div>
+                    <div class="degree">Class 12</div>
+                    <div class="achievements">
+                        <span class="achievement-tag">
+                            <i class="fas fa-star"></i>
+                            Percentage: 93.4%
+                        </span>
+                    </div>
+                </div>
+                <div class="location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Assam, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>2014-2015</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-details">
+                    <div class="institution">Kendriya Vidyalaya Silchar</div>
+                    <div class="degree">Class 10</div>
+                    <div class="achievements">
+                        <span class="achievement-tag">
+                            <i class="fas fa-award"></i>
+                            Merit Scholarship Holder
+                        </span>
+                        <span class="achievement-tag">
+                            <i class="fas fa-star"></i>
+                            CGPA: 10/10
+                        </span>
+                    </div>
+                </div>
+                <div class="location-date">
+                    <div><i class="fas fa-map-marker-alt"></i>Assam, India</div>
+                    <div><i class="fas fa-calendar-alt"></i>2012-2013</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Soft Skills Section -->
+        <section class="soft-skills-section">
+            <h2>Soft Skills</h2>
+            <ul class="soft-skills-list">
+                <li class="soft-skill-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Problem-Solving:</strong> Resolved and delivered multiple complex challenges in multidisciplinary projects.
+                </li>
+                <li class="soft-skill-item">
+                    <i class="fas fa-users"></i>
+                    <strong>Leadership and Project Management:</strong> Successfully led academic and professional team to deliver high-impact projects.
+                </li>
+                <li class="soft-skill-item">
+                    <i class="fas fa-search"></i>
+                    <strong>Attention to Detail:</strong> Maintains rigorous testing and review processes to ensure code quality.
+                </li>
+                <li class="soft-skill-item">
+                    <i class="fas fa-heart"></i>
+                    <strong>Empathy and Collaboration:</strong> Demonstrates high emotional intelligence and fosters team growth.
+                </li>
+            </ul>
+        </section>
+
+        <!-- 8. Certifications Section -->
+        <section class="certifications-section">
+            <h2>Certifications</h2>
+            <ul class="cert-list">
+                <li class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    Atlassian Agile Project Management Professional Certificate
+                </li>
+                <li class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    Full Stack Web Development Bootcamp (Udemy)
+                </li>
+                <li class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    Data Structures and Algorithm Essentials (Udemy)
+                </li>
+                <li class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    Foundation for Data Science and Machine Learning Bootcamp (Udemy)
+                </li>
+                <li class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    EXL eDart for Data Analytics (Great Learning)
+                </li>
+            </ul>
+        </section>
+
+        <!-- 9. Part-time Jobs/Volunteering/Co-curricular Section -->
+        <section class="cocurricular-section">
+            <h2>Part-time Jobs / Volunteering / Co-curricular</h2>
+            <ul class="activity-list">
+                <li class="activity-item">Class Representative, Software Engineering at Australian National University, Australia</li>
+                <li class="activity-item">Speaker, LLM Event conducted by National Computing Infrastructure (Australia) and Research Graph Foundation, Australia</li>
+                <li class="activity-item">Retail Email Assistant Staff Volunteer at Vinnies Braddon, ACT, Australia</li>
+                <li class="activity-item">Editor and Design Sub-Editor at Bossy, ANU, Australia</li>
+                <li class="activity-item">Content Sub-Editor at Bossy, ANU, Australia</li>
+                <li class="activity-item">Committee, Australian Computing Society (ACS), Australia</li>
+                <li class="activity-item">Volunteer, Australian National University (ANU) Orientation Week 2024, Australia</li>
+                <li class="activity-item">Teaching Educator, Vidyatree, India</li>
+                <li class="activity-item">Student Educator, AWIM program by Maruti Suzuki, New Delhi, India</li>
+                <li class="activity-item">Team Leader, Eyantra Robotics Competition, IIT Bombay</li>
+                <li class="activity-item">Delegate, Jamia Millia Islamia Model United Nations, New Delhi, India</li>
+            </ul>
+        </section>
+    </main>
+
+
+</body>
+</html></html>
